@@ -1,29 +1,37 @@
 {% load static %}
 <!DOCTYPE html>
-{% load static %}
+
 <html>
 <head>
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="box">
-        <iframe src="static/pdf/Medical-Report-Free-Download-PDF-Template.pdf" frameborder="2" scrolling="yes" width="600" height="712" align="left" > </iframe> 
-    </div>
+                                                    
+        
+        <div class="box">
+                        {% block content %}
+                        
+                                <iframe src="{{ uploaded_file_url }}"  frameborder="2" name="frame1" scrolling="yes" width="600" height="712" align="right" >
+                                        
+                                </iframe> 
+                                                        
+                                <form method="post" enctype="multipart/form-data" name="frame1">
+                                {% csrf_token %}
+                                <input type="file" name="myfile">
+                                <button type="submit">Upload</button>
+                                </form>
+                                {% if uploaded_file_url %}
+                                        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+                                {% endif %}
 
-    <div class="box">    
-            <form action="https://api.cloudconvert.com/convert" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="hidden" name="apikey" value="lU1MyU6xnPCeiF0qfW0da-buD3d1QS7dMkurLXdG4Q5pS6nJeiZHx-zzCoA1B-NOpdad-hMz4zgZjbwj8Sgf-Q">
-                    <input type="hidden" name="inputformat" value="pdf">
-                    <input type="hidden" name="outputformat" value="html">
-                    <input type="hidden" name="input" value="upload">
-                    <input type="hidden" name="timeout" value="10">
-                    <input type="hidden" name="wait" value="true">
-                    <input type="hidden" name="download" value="inline">
-                    <input type="hidden" name="save" value="true">
-                    <input type="submit" value="Convert!">
-            </form>
-       
-    </div>    
+                        {% endblock %}
+                
+        </div>
+        <div class="box">    
+                        <iframe src="" frameborder="2" id="myFrame" scrolling="yes" width="600" height="712" align="left" > 
+
+                        </iframe> 
+        </div>         
+          
 </body>
 </html>

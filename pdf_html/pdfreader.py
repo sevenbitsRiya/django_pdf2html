@@ -1,13 +1,19 @@
-import cloudconvert
-api = cloudconvert.Api('lU1MyU6xnPCeiF0qfW0da-buD3d1QS7dMkurLXdG4Q5pS6nJeiZHx-zzCoA1B-NOpdad-hMz4zgZjbwj8Sgf-Q')
+from urllib.request import urlopen
  
-process = api.convert({
-    "inputformat": "pdf",
-    "outputformat": "html",
-    "input": "upload",
-    "timeout": 10,
-    "save": true,
-    "file": open('inputfile.pdf', 'rb')
-})
-process.wait()
-process.download()
+from urllib.error import HTTPError
+ 
+from urllib.error import URLError
+ 
+from bs4 import BeautifulSoup
+ 
+try:
+    html = urlopen("https://api.cloudconvert.com/convert/")
+except HTTPError as e:
+    print(e)
+except URLError:
+    print("Server down or incorrect domain")
+else:
+    res = BeautifulSoup(html.read(), "html5lib")
+    tag = res.find("frame1")
+    print(tag['src'])
+    
