@@ -46,7 +46,7 @@ def pdf_html(request):
                 wm = tag.find('div',{'class':'c x1 yf w2 h4'}).find('span', {'class':'ls0'}).get_text()
                 context = {DAA:'DAA',wm:'wm'}
                 print(context)
-                return render(request, 'pdf_html/iframe.html', context)  
+                return render(request, 'pdf_html/iframe.html', context=context)  
                 
     return render(request, 'pdf_html/iframe.html')  
 

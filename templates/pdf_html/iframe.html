@@ -10,10 +10,9 @@
         
         <div class="box">
                         {% block content %}
-                        
-                                <iframe src="{{ uploaded_file_url }}"  frameborder="2" name="frame1" scrolling="yes" width="600" height="712" align="right" >
-                                        
-                                </iframe> 
+                                <iframe src="" enctype="multipart/form-data" name="frame1" height="712px" width="512px">
+                                         
+                                </iframe>
                                                         
                                 <form method="post" enctype="multipart/form-data" name="frame1">
                                 {% csrf_token %}
@@ -28,10 +27,10 @@
                 
         </div>
         <div class="box">    
-                        <iframe src="" frameborder="2" id="myFrame" scrolling="yes" width="600" height="712" align="left" > 
+<!--                        <iframe src="" frameborder="2" id="myFrame" scrolling="yes" width="600" height="712" align="left" > 
 
                         </iframe> 
-        </div>         
+   -->     </div>         
           
 </body>
 </html>
