@@ -17,22 +17,32 @@
                                 <form method="post" enctype="multipart/form-data" name="frame1">
                                 {% csrf_token %}
                                 <input type="file" name="myfile">
-                                <button type="submit">Upload</button>
+                                <button type="submit" id="mybtn">Upload</button>
+                                
                                 </form>
-                                {% if uploaded_file_url %}
-                                        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-                                {% endif %}
+                                
                                 
                 
         </div>
-        <div class="box">    
-                <iframe src="{{ uploaded_file_url1 }}" frameborder="2" id="myFrame" enctype="multipart/form-data" scrolling="yes" width="600" height="712" align="left" > 
-                    
-                </iframe> 
-          </div>         
-          <div>
+        <div class="box">
+                        <iframe src="{{ uploaded_file_url1 }}" enctype="multipart/form-data" name="frame2" height="712px" width="512px" scrolling="yes">
+                        </iframe>
+                        <a href=""><button type="submit" id="mybtn2">Save As PDF</button></a>        
+                                
+                        
+        </div>         
+       
+          <script>
+                document.getElementById('mybtn').addEventListener('click', function() {
+                        var iframeDocument = document.getElementById('frame2').contentDocument;
+                        var obj1 = document.getElementById("01");
+                 iframeDocument.open();
+                 
+                 iframeDocument.write(obj1);
+                 iframeDocument.close();
+                });
+        </script>
               
-          </div>
 {% endblock %}
           
 </body>

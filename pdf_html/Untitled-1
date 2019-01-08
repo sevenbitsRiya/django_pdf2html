@@ -1,0 +1,7 @@
+import PyPDF2
+file = open('/home/sevenbits/pro/project/myproject/static/pdf/Medical-Report-Free-Download-PDF-Template.pdf', 'rb')
+pdfreader = PyPDF2.PdfFileReader(file)
+print(pdfreader.getNumPages())
+pageObj = pdfreader.getPage(0)
+page = ord(pageObj.extractText())
+

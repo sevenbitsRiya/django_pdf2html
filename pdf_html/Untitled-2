@@ -15,13 +15,19 @@ from .models import patient_profile_conclusion
 
 def pdf_html(request):
     try:
+        html = open('/home/sevenbits/pro/project/myproject/riya.html')     
+    except HTTPError as e:
+        print(e)
+    except URLError:
+        print("Server down or incorrect domain")
+    else:
         if request.method == 'POST':
             uploaded_file = request.FILES['myfile']
             fs = FileSystemStorage()
             name = fs.save(uploaded_file.name, uploaded_file)
             url = fs.url(name)
             uploaded_file_url = fs.url(name)
-            api = cloudconvert.Api('EwzmwYg9LNggAcJdCfg0i5kPQqVSZPMnsYZw1KczeWJTuBlsT0uceQmKBllQppoA')
+            api = cloudconvert.Api('vR4s5Fq356PyyWFafqzAY087HDLgk0bBeHLtAdJ4bF5QpOXmGiMQ1CK0VOYp9pan')
             process = api.convert({
                 "inputformat": "pdf",
                 "outputformat": "html",
@@ -39,7 +45,6 @@ def pdf_html(request):
             res = BeautifulSoup(html.read(), "html5lib")
             tag = res.find_all('div', {"id":"pf1"})
             header = res.find('div', {'class': "c x1 y1 w2 h2"})
-            
             name = res.find('div', {'class':"t m0 x2 h5 y1b ff1 fs1 fc0 sc0 ls0 ws0"}).get_text()
             hemoglobin = res.find('div', {'class': 't m0 x12 h9 y22 ff2 fs3 fc0 sc0 ls0 ws0'}).get_text()
             hemoglobin_cnt = res.find('div', {'class': 't m0 x13 h9 y23 ff2 fs3 fc0 sc0 ls0 ws0'}).get_text()
@@ -54,7 +59,19 @@ def pdf_html(request):
             
             fp = open('/home/sevenbits/pro/project/myproject/media/res.html', 'w')
             uploaded_file_url1 = "/media/res.html"
-            
+            #header1 = ''.join(map(str,header))
+            #tag1 = ''.join(map(str, name))
+            #hemoglobin1 = ''.join(map(str,hemoglobin)) 
+            #hemoglobin2 = ''.join(map(str,hemoglobin_cnt)) 
+            #pcv1 = ''.join(map(str,pcv)) 
+            #pcv2 = ''.join(map(str,pcv_cnt)) 
+            #RBC1 = ''.join(map(str,RBC))
+            #RBC2 = ''.join(map(str,RBC_cnt))
+            #MCV1 = ''.join(map(str,MCV))
+            #MCV2 = ''.join(map(str,MCV_cnt))
+            #MCH1 = ''.join(map(str,MCH))
+            #MCH2 = ''.join(map(str,MCH_cnt))
+           
             html = "<html><head></head><body>%s<hr> <center><table><tr><td>%s</td><td>%s</td><td></td><td></td></tr><tr><td>%s</td><td>%s</td><td></td><td></td></tr><tr><td>%s</td><td>%s</td><td></td><td></td></tr></table></center></body>"%(header,hemoglobin,hemoglobin_cnt,pcv,pcv_cnt,RBC,RBC_cnt)
             fp.write(html)
             
@@ -66,11 +83,6 @@ def pdf_html(request):
                 'uploaded_file_url': uploaded_file_url,
                 'uploaded_file_url1': uploaded_file_url1,
             })
-             
-    except HTTPError as e:
-        print(e)
-    except URLError:
-        print("Server down or incorrect domain")
               
     return render(request, 'pdf_html/iframe.html') 
             
