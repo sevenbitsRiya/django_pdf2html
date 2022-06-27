@@ -46,7 +46,7 @@ python-dateutil==2.7.5
 pytz==2018.7
 PyWavelets==1.0.1
 PyYAML==3.13
-reportlab==3.5.12
+reportlab==3.5.55
 requests==2.21.0
 scikit-image==0.14.1
 scikit-learn==0.20.2
