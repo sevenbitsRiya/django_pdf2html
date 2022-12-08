@@ -2,7 +2,7 @@ absl-py==0.6.1
 astor==0.7.1
 backcall==0.1.0
 beautifulsoup4==4.6.3
-certifi==2018.11.29
+certifi==2022.12.7
 chardet==3.0.4
 cloudconvert==1.0.0
 cloudpickle==0.6.1
